@@ -21,8 +21,10 @@
 }
 
 .isClick {
-  color: deepskyblue;
+  color: rgb(34, 112, 247);
   text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 3px;
 }
 
 .news-list {

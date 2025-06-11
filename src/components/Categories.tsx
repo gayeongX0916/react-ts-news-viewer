@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const categoriesItem = [
   "전체보기",
   "비즈니스",
@@ -9,10 +11,25 @@ const categoriesItem = [
 ];
 
 const Categories = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    "전체보기"
+  );
+
+  const handleClick = (item: string) => {
+    setSelectedCategory(item);
+  };
+
   return (
     <div className="categories">
       {categoriesItem.map((item) => (
-        <button className="categories-item">{item}</button>
+        <button
+          className={`${
+            selectedCategory === item ? "isClick" : ""
+          } categories-item`}
+          onClick={() => handleClick(item)}
+        >
+          {item}
+        </button>
       ))}
     </div>
   );
