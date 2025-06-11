@@ -3,23 +3,21 @@ import type { NewsData } from "../types/NewsData";
 import fetchNewsData from "../api/fetchNewsData";
 import Categories from "../components/Categories";
 import NewsList from "../components/NewsList";
+import { useParams } from "react-router-dom";
 
 const NewsPage = () => {
+  const { category } = useParams();
   const [articles, setAricles] = useState<NewsData[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleClick = (item: string) => {
-    setSelectedCategory(item);
-  };
-
   useEffect(() => {
-    const query = selectedCategory === "all" ? "" : selectedCategory;
+    const query = !category || category === "all" ? "" : category;
+    setLoading(true);
+    setError(null);
+
     fetchNewsData(query)
       .then((data) => {
-        setLoading(true);
-        setError(null);
         setAricles(data);
       })
       .catch(() => {
@@ -28,13 +26,13 @@ const NewsPage = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [selectedCategory]);
+  }, [category]);
 
   return (
     <div className="news-viewer">
       {loading && <p>뉴스를 불러오는 중입니다...</p>}
       {error && <p>{error}</p>}
-      <Categories selectedCategory={selectedCategory} onSelect={handleClick} />
+      <Categories />
       <NewsList articles={articles} />
     </div>
   );

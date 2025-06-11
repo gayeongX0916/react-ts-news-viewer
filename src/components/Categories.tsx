@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const categoriesItem = [
   { name: "all", text: "전체보기" },
@@ -10,26 +10,19 @@ const categoriesItem = [
   { name: "technology", text: "기술" },
 ];
 
-type CategoriesProps = {
-  selectedCategory: string;
-  onSelect: (value: string) => void;
-};
-
-const Categories = ({ selectedCategory, onSelect }: CategoriesProps) => {
+const Categories = () => {
   return (
     <div className="categories">
       {categoriesItem.map((item) => (
-        <Link to={item.name === "all" ? "/" : `/${item.name}`}>
-          <button
-            key={item.name}
-            className={`${
-              selectedCategory === item.name ? "isClick" : ""
-            } categories-item`}
-            onClick={() => onSelect(item.name)}
-          >
-            {item.text}
-          </button>
-        </Link>
+        <NavLink
+          key={item.name}
+          to={item.name === "all" ? "/" : `/${item.name}`}
+          className={({ isActive }) =>
+            isActive ? "isClick categories-item" : "categories-item"
+          }
+        >
+          {item.text}
+        </NavLink>
       ))}
     </div>
   );

@@ -13,6 +13,12 @@
   column-gap: 7px;
 }
 
+a {
+  text-decoration: none; 
+  color: inherit;        
+  cursor: pointer;     
+}
+
 .categories-item {
   border: none;
   background-color: unset;
