@@ -1,12 +1,16 @@
+import type { NewsData } from "../types/NewsData";
 import NewsItem from "./NewsItem";
 
-const NewsList = () => {
+type NewsList = {
+  articles: NewsData[];
+};
+
+const NewsList = ({ articles }: NewsList) => {
   return (
     <div className="news-list">
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
+      {articles.map((item, index) => (
+        <NewsItem key={index} {...item} />
+      ))}
     </div>
   );
 };
