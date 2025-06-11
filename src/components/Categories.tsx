@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const categoriesItem = [
   { name: "all", text: "전체보기" },
   { name: "business", text: "비즈니스" },
@@ -17,15 +19,17 @@ const Categories = ({ selectedCategory, onSelect }: CategoriesProps) => {
   return (
     <div className="categories">
       {categoriesItem.map((item) => (
-        <button
-          key={item.name}
-          className={`${
-            selectedCategory === item.name ? "isClick" : ""
-          } categories-item`}
-          onClick={() => onSelect(item.name)}
-        >
-          {item.text}
-        </button>
+        <Link to={item.name === "all" ? "/" : `/${item.name}`}>
+          <button
+            key={item.name}
+            className={`${
+              selectedCategory === item.name ? "isClick" : ""
+            } categories-item`}
+            onClick={() => onSelect(item.name)}
+          >
+            {item.text}
+          </button>
+        </Link>
       ))}
     </div>
   );
