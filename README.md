@@ -11,6 +11,7 @@ React + TypeScript + Vite로 만든 간단한 뉴스 뷰어
 ## 기술 스택
 - HTML
 - CSS
+- React
 - TypeScript
 - Vite
 
